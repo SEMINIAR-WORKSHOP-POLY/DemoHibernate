@@ -15,7 +15,7 @@ import java.util.Properties;
  *
  * @author hangnt
  */
-public class HIbernateUtil {
+public class HibernateUtil {
     private static final SessionFactory FACTORY;
 
     static {
