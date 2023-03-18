@@ -10,9 +10,6 @@ CREATE TABLE hibernate_demo.lop_hoc (
 	toa nvarchar(100) NULL,
 	CONSTRAINT lop_hoc_PK PRIMARY KEY (id)
 )
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO hibernate_demo.lop_hoc
 (id, ma_lop, ten_lop, so_luong_sv, toa)
