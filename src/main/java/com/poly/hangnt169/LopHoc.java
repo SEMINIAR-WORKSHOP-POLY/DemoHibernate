@@ -4,19 +4,19 @@
  */
 package com.poly.hangnt169;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author hangnt
  */
 @Entity
-@Table(name = "category")
+@Table(name = "lop_hoc")
 public class LopHoc {
 
     @Id

@@ -16,21 +16,22 @@ import java.util.Properties;
  * @author hangnt
  */
 public class HibernateUtil {
+
     private static final SessionFactory FACTORY;
 
     static {
         Configuration conf = new Configuration();
 
         Properties properties = new Properties();
-        properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-        properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-        properties.put(Environment.URL, "jdbc:mysql://localhost:3306/hibernate_demo");
-        properties.put(Environment.USER, "root");
-        properties.put(Environment.PASS, "root");
+        properties.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
+        properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=hibernate_demo");
+        properties.put(Environment.USER, "sa");
+        properties.put(Environment.PASS, "Password.1");
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
-
+        conf.addAnnotatedClass(LopHoc.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
@@ -39,5 +40,9 @@ public class HibernateUtil {
 
     public static SessionFactory getFACTORY() {
         return FACTORY;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getFACTORY());
     }
 }

@@ -3,18 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.poly.hangnt169;
+
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author hangnt
  */
 public class LopHocRepository {
-
+    
     public List<LopHoc> getAll() {
         List<LopHoc> lops = new ArrayList<>();
         try ( Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -25,7 +26,7 @@ public class LopHocRepository {
         }
         return lops;
     }
-
+    
     public LopHoc getOne(Long id) {
         LopHoc lop = null;
         try ( Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -37,7 +38,7 @@ public class LopHocRepository {
         }
         return lop;
     }
-
+    
     public Boolean add(LopHoc lop) {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -50,7 +51,7 @@ public class LopHocRepository {
         }
         return false;
     }
-
+    
     public Boolean update(LopHoc lop) {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -63,7 +64,7 @@ public class LopHocRepository {
         }
         return false;
     }
-
+    
     public Boolean delete(LopHoc lop) {
         Transaction transaction = null;
         try ( Session session = HibernateUtil.getFACTORY().openSession()) {
@@ -75,5 +76,9 @@ public class LopHocRepository {
             e.printStackTrace(System.out);
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        new LopHocRepository().getAll().forEach(s -> System.out.println(s));
     }
 }
