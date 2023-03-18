@@ -3,11 +3,11 @@ CREATE DATABASE hibernate_demo;
 USE hibernate_demo;
 
 CREATE TABLE hibernate_demo.lop_hoc (
-	id BIGINT auto_increment NOT NULL,
+	id BIGINT IDENTITY NOT NULL,
 	ma_lop varchar(100) NULL,
-	ten_lop varchar(100) NULL,
+	ten_lop nvarchar(100) NULL,
 	so_luong_sv INTEGER DEFAULT 0 NULL,
-	toa varchar(100) NULL,
+	toa nvarchar(100) NULL,
 	CONSTRAINT lop_hoc_PK PRIMARY KEY (id)
 )
 ENGINE=InnoDB
