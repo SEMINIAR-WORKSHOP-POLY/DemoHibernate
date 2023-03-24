@@ -1,84 +1,103 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.poly.hangnt169;
 
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author hangnt
+ * @author hangnt169
  */
 public class LopHocRepository {
-    
+    // CRUD <=> CREATE <INSERT INTO >, READ <SELECT>, UPDATE, DELETE
+    // Hien thi danh sach tat ca lop hoc => GetAll <=> SELECT * FROM lop_hoc
     public List<LopHoc> getAll() {
-        List<LopHoc> lops = new ArrayList<>();
-        try ( Session session = HibernateUtil.getFACTORY().openSession()) {
+        List<LopHoc> lists = new ArrayList<>();
+        // Code
+        // try..with..resource : Java 7
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
+            // truy van HQL
             Query query = session.createQuery("FROM LopHoc ", LopHoc.class);
-            lops = query.getResultList();
+            lists = query.getResultList();
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace();
         }
-        return lops;
+        return lists;
     }
-    
-    public LopHoc getOne(Long id) {
-        LopHoc lop = null;
-        try ( Session session = HibernateUtil.getFACTORY().openSession()) {
-            Query query = session.createQuery("FROM LopHoc WHERE id=:id");
-            query.setParameter("id", id);
-            lop = (LopHoc) query.getSingleResult();
+
+    // Get one <=> Detail cua 1 doi tuong <=> SELECT * FROM lop_hoc WHERE id =...
+    public LopHoc getOne(Long id2) {
+        LopHoc lopHoc = null;
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
+            // truy van HQL
+            Query query = session.createQuery("FROM LopHoc WHERE id =:id1 ",
+                    LopHoc.class);
+            query.setParameter("id1", id2);
+            lopHoc = (LopHoc) query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace();
         }
-        return lop;
+        return lopHoc;
     }
-    
-    public Boolean add(LopHoc lop) {
+
+    // Add
+    public Boolean add(LopHoc lopHoc) {
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getFACTORY().openSession()) {
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.persist(lop);
+            // Add
+            session.persist(lopHoc);
+            // Commit
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace();
         }
         return false;
     }
-    
-    public Boolean update(LopHoc lop) {
+
+    // Update
+    public Boolean update(LopHoc lopHoc) {
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getFACTORY().openSession()) {
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.merge(lop);
+            // Update
+            session.merge(lopHoc);
+            // Commit
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace();
         }
         return false;
     }
-    
-    public Boolean delete(LopHoc lop) {
+
+    // Delete
+    public Boolean delete(LopHoc lopHoc) {
         Transaction transaction = null;
-        try ( Session session = HibernateUtil.getFACTORY().openSession()) {
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(lop);
+            // Delete
+            session.delete(lopHoc);
+            // Commit
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace();
         }
         return false;
     }
 
     public static void main(String[] args) {
+//        new LopHocRepository().getAll().forEach(s -> System.out.println(s));
+//        System.out.println(new LopHocRepository().getOne(1L));
+//        LopHoc lopHoc = new LopHoc("M10", "IT17317", 39, "P");
+//        System.out.println(new LopHocRepository().add(lopHoc));
+        LopHoc lopHoc = new LopHoc(1L, "M10_Update", "IT17317_Update", 39, "P");
+        System.out.println(new LopHocRepository().delete(lopHoc));
         new LopHocRepository().getAll().forEach(s -> System.out.println(s));
+
     }
 }
