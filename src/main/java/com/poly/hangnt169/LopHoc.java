@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.poly.hangnt169;
 
 import jakarta.persistence.Column;
@@ -12,15 +8,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- *
- * @author hangnt
+ * @author hangnt169
  */
 @Entity
 @Table(name = "lop_hoc")
 public class LopHoc {
-
+    /**
+     * Java 3 : JDBC : Truy Van DB
+     * Java 4: Hibernate
+     * Java 5 > : JPA  => Spring Boot
+     * Hibernate : Truy Van thuc the (Entity) : HQL (Hibernate Query Language)
+     * ORM (Object Relationship Mapping)
+     * varchar, nvarchar => String
+     * bigint => Long
+     * Quan he : 1-1, 1-n, ...
+     * LopHoc => Table : Cac cot (column):
+     * + Khoa chinh
+     * + Khoa ngoai
+     * + Column
+     */
+    // Xd cot nay la khoa chinh
     @Id
     @Column(name = "id")
+    // Tu tang
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -89,7 +99,12 @@ public class LopHoc {
 
     @Override
     public String toString() {
-        return "LopHoc{" + "id=" + id + ", maLop=" + maLop + ", tenLop=" + tenLop + ", soLuongSV=" + soLuongSV + ", toa=" + toa + '}';
+        return "LopHoc{" +
+                "id=" + id +
+                ", maLop='" + maLop + '\'' +
+                ", tenLop='" + tenLop + '\'' +
+                ", soLuongSV=" + soLuongSV +
+                ", toa='" + toa + '\'' +
+                '}';
     }
-
 }
